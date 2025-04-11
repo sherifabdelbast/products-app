@@ -1,0 +1,69 @@
+<!-- login/login.component.html -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="space-y-6">
+      <div>
+        <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+        <input
+          id="email"
+          type="email"
+          [(ngModel)]="loginData.email"
+          name="email"
+          required
+          email
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          [ngClass]="{'border-red-500': (submitted || email.touched) && email.invalid}"
+          placeholder="Enter your email"
+          #email="ngModel"
+        >
+        @if ((submitted || email.touched) && email.invalid) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (email.errors?.['required']) {
+              <span>Email is required.</span>
+            } @else if (email.errors?.['email'] || email.errors?.['pattern']) {
+              <span>Invalid email format.</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="loginData.password"
+          name="password"
+          required
+          minlength="6"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          [ngClass]="{'border-red-500': (submitted || password.touched) && password.invalid}"
+          placeholder="Enter your password"
+          #password="ngModel"
+        >
+        @if ((submitted || password.touched) && password.invalid) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (password.errors?.['required']) {
+              <span>Password is required.</span>
+            } @else if (password.errors?.['minlength']) {
+              <span>Password must be at least 6 characters.</span>
+            } @else if (password.errors?.['pattern']) {
+              <span>Password must include uppercase, lowercase, and a number.</span>
+            }
+          </div>
+        }
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-green-700 text-white p-3 rounded-full shadow-md hover:bg-green-800 transition-all duration-200 font-semibold"
+      >
+        Login
+      </button>
+    </form>
+    <p class="mt-4 text-center text-gray-700">
+      Don’t have an account? <a routerLink="/register" class="text-green-600 hover:underline">Register</a>
+    </p>
+  </div>
+</div>

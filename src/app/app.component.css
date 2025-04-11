@@ -1,0 +1,23 @@
+/* src/app/app.component.css */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header {
+    background: #2c3e50;
+    padding: 10px 20px;
+    position: relative; /* Ensure header is a positioning context */
+    z-index: 100; /* Higher than stock-status */
+  }
+  
+  .navbar a {
+    color: white;
+    margin-right: 20px;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }

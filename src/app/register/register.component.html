@@ -1,0 +1,171 @@
+<!-- register/register.component.html -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div>
+        <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          [ngClass]="{'border-red-500': (submitted || registerForm.controls['username'].touched) && registerForm.controls['username'].invalid}"
+          placeholder="Enter your username"
+        >
+        @if ((submitted || registerForm.controls['username'].touched) && registerForm.controls['username'].invalid) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (registerForm.controls['username'].errors?.['required']) {
+              <span>Username is required.</span>
+            } @else if (registerForm.controls['username'].errors?.['minlength']) {
+              <span>Username must be at least 3 characters.</span>
+            } @else if (registerForm.controls['username'].errors?.['pattern']) {
+              <span>Username can only contain letters, numbers, and underscores.</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          [ngClass]="{'border-red-500': (submitted || registerForm.controls['email'].touched) && registerForm.controls['email'].invalid}"
+          placeholder="Enter your email"
+        >
+        @if ((submitted || registerForm.controls['email'].touched) && registerForm.controls['email'].invalid) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (registerForm.controls['email'].errors?.['required']) {
+              <span>Email is required.</span>
+            } @else if (registerForm.controls['email'].errors?.['email'] || registerForm.controls['email'].errors?.['pattern']) {
+              <span>Invalid email format.</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          [ngClass]="{'border-red-500': (submitted || registerForm.controls['password'].touched) && registerForm.controls['password'].invalid}"
+          placeholder="Enter your password"
+        >
+        @if ((submitted || registerForm.controls['password'].touched) && registerForm.controls['password'].invalid) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (registerForm.controls['password'].errors?.['required']) {
+              <span>Password is required.</span>
+            } @else if (registerForm.controls['password'].errors?.['minlength']) {
+              <span>Password must be at least 6 characters.</span>
+            } @else if (registerForm.controls['password'].errors?.['pattern']) {
+              <span>Password must include uppercase, lowercase, and a number.</span>
+            }
+          </div>
+        }
+      </div>
+      <div>
+        <label for="confirmPassword" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          [ngClass]="{'border-red-500': (submitted || registerForm.controls['confirmPassword'].touched) && (registerForm.controls['confirmPassword'].invalid || registerForm.errors?.['mismatch'])}"
+          placeholder="Confirm your password"
+        >
+        @if (submitted || registerForm.controls['confirmPassword'].touched) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (registerForm.controls['confirmPassword'].errors?.['required']) {
+              <span>Confirmation is required.</span>
+            } @else if (registerForm.errors?.['mismatch']) {
+              <span>Passwords do not match.</span>
+            }
+          </div>
+        }
+      </div>
+      <div formGroupName="address" class="space-y-4">
+        <div>
+          <label for="street" class="block text-gray-700 font-medium mb-2">Street</label>
+          <input
+            id="street"
+            type="text"
+            formControlName="street"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            [ngClass]="{'border-red-500': (submitted || registerForm.get('address.street')?.touched) && registerForm.get('address.street')?.invalid}"
+            placeholder="Enter your street"
+          >
+          @if ((submitted || registerForm.get('address.street')?.touched) && registerForm.get('address.street')?.invalid) {
+            <div class="text-red-500 text-sm mt-1">
+              <span>Street is required.</span>
+            </div>
+          }
+        </div>
+        <div>
+          <label for="city" class="block text-gray-700 font-medium mb-2">City</label>
+          <input
+            id="city"
+            type="text"
+            formControlName="city"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            [ngClass]="{'border-red-500': (submitted || registerForm.get('address.city')?.touched) && registerForm.get('address.city')?.invalid}"
+            placeholder="Enter your city"
+          >
+          @if ((submitted || registerForm.get('address.city')?.touched) && registerForm.get('address.city')?.invalid) {
+            <div class="text-red-500 text-sm mt-1">
+              <span>City is required.</span>
+            </div>
+          }
+        </div>
+        <div>
+          <label for="state" class="block text-gray-700 font-medium mb-2">State</label>
+          <input
+            id="state"
+            type="text"
+            formControlName="state"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            [ngClass]="{'border-red-500': (submitted || registerForm.get('address.state')?.touched) && registerForm.get('address.state')?.invalid}"
+            placeholder="Enter your state"
+          >
+          @if ((submitted || registerForm.get('address.state')?.touched) && registerForm.get('address.state')?.invalid) {
+            <div class="text-red-500 text-sm mt-1">
+              <span>State is required.</span>
+            </div>
+          }
+        </div>
+        <div>
+          <label for="zip" class="block text-gray-700 font-medium mb-2">ZIP Code</label>
+          <input
+            id="zip"
+            type="text"
+            formControlName="zip"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            [ngClass]="{'border-red-500': (submitted || registerForm.get('address.zip')?.touched) && registerForm.get('address.zip')?.invalid}"
+            placeholder="Enter your ZIP code"
+          >
+          @if ((submitted || registerForm.get('address.zip')?.touched) && registerForm.get('address.zip')?.invalid) {
+            <div class="text-red-500 text-sm mt-1">
+              @if (registerForm.get('address.zip')?.errors?.['required']) {
+                <span>ZIP code is required.</span>
+              } @else if (registerForm.get('address.zip')?.errors?.['pattern']) {
+                <span>ZIP code must be 5 digits.</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-green-700 text-white p-3 rounded-full shadow-md hover:bg-green-800 transition-all duration-200 font-semibold"
+      >
+        Register
+      </button>
+    </form>
+    <p class="mt-4 text-center text-gray-700">
+      Already have an account? <a routerLink="/login" class="text-green-600 hover:underline">Login</a>
+    </p>
+  </div>
+</div>

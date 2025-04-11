@@ -1,0 +1,66 @@
+<!-- product-details/product-details.component.html -->
+<div class="container mx-auto p-6">
+  <div *ngIf="!product" class="text-center text-gray-500 py-8">Loading...</div>
+  <div *ngIf="product" class="bg-white p-6 rounded-lg shadow-lg">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Image Carousel -->
+      <div class="relative">
+        <img
+          [src]="product.images[currentImageIndex]"
+          [alt]="product.title"
+          class="w-full h-96 object-cover rounded-lg"
+        >
+        <button
+          (click)="prevImage()"
+          class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+        >
+          ❮
+        </button>
+        <button
+          (click)="nextImage()"
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+        >
+          ❯
+        </button>
+        <div class="flex justify-center mt-4 space-x-2">
+          <span
+            *ngFor="let img of product.images; let i = index"
+            [ngClass]="{'w-3 h-3 bg-gray-800 rounded-full': i === currentImageIndex, 'w-2 h-2 bg-gray-400 rounded-full': i !== currentImageIndex}"
+          ></span>
+        </div>
+      </div>
+
+      <!-- Details -->
+      <div>
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ product.title }}</h1>
+        <p class="text-gray-700 mb-2 text-lg">Category: {{ product.category }}</p>
+        <p class="text-gray-700 mb-2 text-lg">Brand: {{ product.brand }}</p>
+        <p class="text-gray-700 mb-2 text-lg">Rating: {{ product.rating }} / 5</p>
+        <p class="text-gray-700 line-through mb-2 text-xl">${{ product.price }}</p>
+        <p class="text-green-600 text-3xl font-bold mb-4">{{ product.price | discount:product.discountPercentage }}</p>
+        <p class="text-gray-700 mb-6 text-base leading-relaxed">{{ product.description }}</p>
+        <p
+          [ngClass]="{'text-red-500': product.stock === 0, 'text-green-500': product.stock > 0}"
+          class="text-lg font-semibold mb-6"
+        >
+          {{ product.stock === 0 ? 'Out of Stock' : 'In Stock (' + product.stock + ' available)' }}
+        </p>
+        <div class="flex space-x-4">
+          <button
+            (click)="backToProducts()"
+            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-2 rounded-full shadow-md hover:from-gray-700 hover:to-gray-800 transition-all duration-200 font-medium"
+          >
+            Back to Products
+          </button>
+          <button
+            (click)="addToCart()"
+            [disabled]="product.stock === 0"
+            class="flex-1 bg-white border border-green-600 text-green-600 px-4 py-2 rounded-full shadow-md hover:bg-green-50 disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed transition-all duration-200 font-medium"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

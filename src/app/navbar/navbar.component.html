@@ -1,0 +1,12 @@
+<!-- navbar/navbar.component.html -->
+<nav class="bg-gray-800 p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a routerLink="/" class="text-white text-xl font-bold">Shop</a>
+    <div class="space-x-4">
+      <a routerLink="/" class="text-white hover:text-gray-300">Products</a>
+      <a routerLink="/cart" class="text-white hover:text-gray-300">Cart ({{ cartService.getCartCount() }})</a>
+      <a routerLink="/login" class="text-white hover:text-gray-300">Login</a>
+      <a routerLink="/register" class="text-white hover:text-gray-300">Register</a>
+    </div>
+  </div>
+</nav>

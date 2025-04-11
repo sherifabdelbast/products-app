@@ -1,0 +1,6 @@
+.half-star {
+  display: inline-block;
+  width: 1em;
+  overflow: hidden;
+  background: linear-gradient(to right, #facc15 50%, #ffffff 50%);
+}

@@ -1,0 +1,35 @@
+.login-card {
+    max-width: 450px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+  }
+  .field-group {
+    margin-bottom: 1.5rem;
+  }
+  label {
+    display: block;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .error {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+  mat-card-title {
+    font-size: 1.8rem;
+    color: #333;
+  }
+  .link {
+    color: #1976d2;
+    text-decoration: underline;
+  }
+  mat-hint {
+    color: #666;
+  }
